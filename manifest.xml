@@ -5,7 +5,6 @@
            xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" 
            xsi:type="TaskPaneApp">
   
-  <!-- 基本信息 -->
   <Id>d7c9f8a0-4b1d-4f1d-8f9d-123456789abc</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Antigravity</ProviderName>
@@ -13,43 +12,45 @@
   <DisplayName DefaultValue="DataMatcher Pro" />
   <Description DefaultValue="极速数据匹配与回填专家" />
   
-  <!-- 图标 (可以后续替换) -->
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png" />
-
-  <!-- 权限：需要读写权限来读取和染色 -->
-  <Permissions>ReadWriteDocument</Permissions>
+  <IconUrl DefaultValue="https://ibadboy2000.github.io/data-matcher-pro/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://ibadboy2000.github.io/data-matcher-pro/assets/icon-80.png" />
+  <SupportUrl DefaultValue="https://ibadboy2000.github.io/data-matcher-pro/help.html" />
 
   <Hosts>
     <Host Name="Workbook" />
   </Hosts>
 
-  <DefaultSettings>
-    <SourceLocation DefaultValue="https://localhost:3000/taskpane.html" />
-  </DefaultSettings>
-
   <Requirements>
     <Sets DefaultMinVersion="1.1">
-      <Set Name="ExcelApi" />
+      <Set Name="ExcelApi" MinVersion="1.1" />
     </Sets>
   </Requirements>
 
-  <!-- 现代 Office UI 扩展 (VersionOverrides) -->
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://ibadboy2000.github.io/data-matcher-pro/taskpane.html" />
+  </DefaultSettings>
+
+  <Permissions>ReadWriteDocument</Permissions>
+
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
     <Hosts>
       <Host xsi:type="Workbook">
         <DesktopFormFactor>
-          <!-- 功能区 (Ribbon) 按钮配置 -->
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
-            <CustomTab id="DataMatcherTab">
-              <Label DefaultValue="数据匹配专家" />
+            <OfficeTab id="TabHome">
               <Group id="DataMatcherGroup">
-                <Label DefaultValue="数据处理" />
+                <Label resid="Group.Label" />
+                <!-- 修复点：根据校验器提示，在 Group 中补全 Icon 节点 -->
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
+                </Icon>
                 <Control xsi:type="Button" id="ShowTaskpaneButton">
-                  <Label DefaultValue="打开面板" />
+                  <Label resid="Button.Label" />
                   <Supertip>
-                    <Title DefaultValue="打开 DataMatcher Pro" />
-                    <Description DefaultValue="打开侧边栏面板进行数据匹配。" />
+                    <Title resid="Button.Title" />
+                    <Description resid="Button.Description" />
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="Icon.16x16" />
@@ -62,7 +63,7 @@
                   </Action>
                 </Control>
               </Group>
-            </CustomTab>
+            </OfficeTab>
           </ExtensionPoint>
         </DesktopFormFactor>
       </Host>
@@ -70,13 +71,21 @@
     
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" resid="Icon.16x16" />
-        <bt:Image id="Icon.32x32" resid="Icon.32x32" />
-        <bt:Image id="Icon.80x80" resid="Icon.80x80" />
+        <bt:Image id="Icon.16x16" DefaultValue="https://ibadboy2000.github.io/data-matcher-pro/assets/icon-32.png" />
+        <bt:Image id="Icon.32x32" DefaultValue="https://ibadboy2000.github.io/data-matcher-pro/assets/icon-32.png" />
+        <bt:Image id="Icon.80x80" DefaultValue="https://ibadboy2000.github.io/data-matcher-pro/assets/icon-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html" />
+        <bt:Url id="Taskpane.Url" DefaultValue="https://ibadboy2000.github.io/data-matcher-pro/taskpane.html" />
       </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="Group.Label" DefaultValue="数据处理" />
+        <bt:String id="Button.Label" DefaultValue="打开面板" />
+        <bt:String id="Button.Title" DefaultValue="打开 DataMatcher Pro" />
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="Button.Description" DefaultValue="打开侧边栏面板进行数据匹配。" />
+      </bt:LongStrings>
     </Resources>
   </VersionOverrides>
 </OfficeApp>

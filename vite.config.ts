@@ -4,8 +4,10 @@ import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: './', // 设置为相对路径，支持 GitHub Pages 的二级目录
   server: {
     port: 3000,
+
     https: true,
   },
   build: {
